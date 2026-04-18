@@ -1,11 +1,11 @@
-# ⚡ Rizonet
+# Rizonet
 
 > **As light and fast as Tauri, as environment-independent as Electron.**
 > A desktop-app framework that aims for the best of both worlds.
 
 ---
 
-## 🎯 Why Rizonet
+## Why Rizonet
 
 | Trait | Tauri | Electron | **Rizonet** |
 |---|---|---|---|
@@ -15,7 +15,7 @@
 | Rendering consistency | Depends on OS | Fully consistent | **Fully consistent in `strict` mode** |
 | Backend language | Rust | Node.js | **Rust** |
 
-## 🧠 Architecture: *Hybrid Runtime Bootstrap*
+## Architecture: Hybrid Runtime Bootstrap
 
 ```
 ┌──────────────────────────── Rizonet App ────────────────────────────┐
@@ -51,7 +51,7 @@ On Windows, the bundled mode wires WebView2 through the official
 fixed-version WebView2 Runtime ZIP and get pixel-identical rendering
 across every Windows install.
 
-## 📂 Repository layout
+## Repository layout
 
 ```
 crates/
@@ -63,7 +63,7 @@ examples/
   hello/              # Working sample
 ```
 
-## 🚀 Quick start
+## Quick start
 
 ### 1. Build the CLI
 
@@ -107,7 +107,7 @@ Headless end-to-end test (packages `examples/hello`):
 cargo test -p rizonet-studio --test e2e_build --release -- --ignored --nocapture
 ```
 
-## 🔌 IPC
+## IPC
 
 ### Rust
 
@@ -134,7 +134,7 @@ Or raw DOM:
 const r = await window.__RIZONET__.invoke("ping", { hello: "world" });
 ```
 
-## 🧩 Plugins
+## Plugins
 
 ```rust
 use rizonet_core::{IpcHandler, Plugin, Result};
@@ -152,7 +152,7 @@ impl Plugin for Clock {
 AppBuilder::new(cfg).plugin(Clock).run()?;
 ```
 
-## 🔄 Auto-updater
+## Auto-updater
 
 Host a JSON manifest:
 
@@ -189,7 +189,7 @@ The staged artifact is placed next to the current executable with a
 `.rizonet-update` suffix, after SHA-256 verification. The host app is
 responsible for swapping it in and restarting (platform-specific).
 
-## ⚙️ `rizonet.config.json`
+## `rizonet.config.json`
 
 ```jsonc
 {
@@ -208,7 +208,7 @@ responsible for swapping it in and restarting (platform-specific).
 }
 ```
 
-## 🧰 Built-in IPC commands
+## Built-in IPC commands
 
 Every Rizonet app gets these commands for free (gated by the `capabilities`
 allow/deny policy):
@@ -259,7 +259,7 @@ let db = rizonet_core::handle().state::<Db>().unwrap();
 db.0.lock().unwrap().push("hi".into());
 ```
 
-## 🛠️ Implementation status
+## Implementation status
 
 - [x] Cargo workspace, CLI (`new` / `dev` / `build` / `info` / `update-check`)
 - [x] Window + WebView via `wry` + `tao`
@@ -282,6 +282,6 @@ db.0.lock().unwrap().push("hi".into());
 - [ ] Apply staged update + restart (platform-specific)
 - [ ] Code signing helpers
 
-## 📄 License
+## License
 
 MIT OR Apache-2.0
