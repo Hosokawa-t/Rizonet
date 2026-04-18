@@ -1,0 +1,54 @@
+[workspace]
+resolver = "2"
+members = [
+    "crates/rizonet-core",
+    "crates/rizonet-cli",
+    "examples/hello/src-rizonet",
+    "examples/notes/src-rizonet",
+    "examples/studio/src-rizonet",
+]
+exclude = []
+
+[workspace.package]
+version = "0.1.0"
+edition = "2021"
+license = "MIT OR Apache-2.0"
+authors = ["Rizonet Contributors"]
+repository = "https://github.com/rizonet/rizonet"
+rust-version = "1.75"
+
+[workspace.dependencies]
+rizonet-core = { path = "crates/rizonet-core", version = "0.1.0" }
+wry = { version = "0.45", features = ["devtools"] }
+tao = "0.30"
+rfd = "0.15"
+notify-rust = "4"
+arboard = "3"
+opener = "0.7"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+tokio = { version = "1", features = ["rt-multi-thread", "macros", "fs", "io-util"] }
+anyhow = "1"
+thiserror = "1"
+reqwest = { version = "0.12", features = ["stream", "json", "rustls-tls"], default-features = false }
+directories = "5"
+sha2 = "0.10"
+hex = "0.4"
+clap = { version = "4", features = ["derive"] }
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter"] }
+zip = { version = "2", default-features = false, features = ["deflate", "zstd"] }
+semver = "1"
+winreg = "0.52"
+tempfile = "3"
+include_dir = "0.7"
+
+[profile.release]
+opt-level = "z"
+lto = true
+codegen-units = 1
+strip = true
+# Use unwinding so panics on background threads (e.g. the native file
+# dialog thread) can be caught via `JoinHandle::join()` instead of
+# aborting the entire process.
+panic = "unwind"

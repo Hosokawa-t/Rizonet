@@ -1,0 +1,16 @@
+target/
+**/target/
+node_modules/
+dist-ts/
+packages/*/dist/
+.DS_Store
+*.log
+
+# IDE / editor noise
+.vscode/
+.idea/
+*.swp
+
+# Release packaging artifacts
+release/
+*.zip

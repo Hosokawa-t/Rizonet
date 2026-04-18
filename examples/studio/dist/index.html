@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Rizonet Studio</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="top">
+    <h1>⚡ Rizonet Studio</h1>
+    <span class="tag">Package any web app into a native binary</span>
+  </header>
+
+  <main class="layout">
+    <section class="form">
+      <h2>1 · Source</h2>
+      <label>Web app folder
+        <div class="path-row">
+          <input id="source" type="text" placeholder="folder containing index.html" />
+          <button id="pick-source">Browse…</button>
+        </div>
+      </label>
+
+      <h2>2 · Output</h2>
+      <label>Output folder
+        <div class="path-row">
+          <input id="output" type="text" placeholder="where to write the binary" />
+          <button id="pick-output">Browse…</button>
+        </div>
+      </label>
+
+      <h2>3 · App metadata</h2>
+      <div class="grid">
+        <label>App name
+          <input id="name" type="text" value="My App" />
+        </label>
+        <label>Identifier
+          <input id="identifier" type="text" value="com.example.myapp" />
+        </label>
+        <label>Window title
+          <input id="title" type="text" value="My App" />
+        </label>
+        <label>Runtime mode
+          <select id="mode">
+            <option value="auto">auto (system WebView, fallback to bundled)</option>
+            <option value="system">system (always OS WebView)</option>
+            <option value="strict">strict (always bundled runtime)</option>
+          </select>
+        </label>
+      </div>
+
+      <h2>4 · Window mode</h2>
+      <div class="grid">
+        <label>Mode
+          <select id="window-mode">
+            <option value="windowed">Windowed (resizable with initial size)</option>
+            <option value="maximized">Maximized (full-size window with title bar)</option>
+            <option value="fullscreen">Fullscreen (borderless exclusive)</option>
+          </select>
+        </label>
+        <label>Initial width
+          <input id="width" type="number" value="1024" min="320" />
+        </label>
+        <label>Initial height
+          <input id="height" type="number" value="768" min="240" />
+        </label>
+        <label class="checkbox-row">
+          <input id="resizable" type="checkbox" checked />
+          <span>Resizable</span>
+        </label>
+      </div>
+
+      <h2>5 · Capabilities</h2>
+      <label>Allow patterns (one per line)
+        <textarea id="allow" rows="4">dialog:*
+path:*
+shell:open</textarea>
+      </label>
+
+      <h2>6 · Output</h2>
+      <label class="checkbox-row">
+        <input id="make-installer" type="checkbox" checked />
+        <span>Also generate a Windows installer (<code>&lt;name&gt;-Setup.exe</code>)</span>
+      </label>
+
+      <div class="actions">
+        <button id="build" class="primary">Build native app</button>
+        <button id="open-out" disabled>Open output folder</button>
+        <button id="devtools" class="ghost">DevTools</button>
+      </div>
+    </section>
+
+    <section class="console">
+      <header>
+        <h2>Build log</h2>
+        <div class="progress" id="progress">idle</div>
+      </header>
+      <pre id="log"></pre>
+    </section>
+  </main>
+  <script src="app.js"></script>
+</body>
+</html>

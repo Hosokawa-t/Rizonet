@@ -1,0 +1,29 @@
+{
+  "app": {
+    "name": "Rizonet Notes",
+    "identifier": "net.rizonet.notes",
+    "dist_dir": "dist"
+  },
+  "window": {
+    "title": "Rizonet Notes",
+    "width": 1100,
+    "height": 720,
+    "resizable": true
+  },
+  "runtime": {
+    "mode": "auto"
+  },
+  "capabilities": {
+    "allow": [
+      "notes:*",
+      "dialog:*",
+      "notification:*",
+      "clipboard:*",
+      "shell:open",
+      "path:*",
+      "window:*",
+      "devtools:*",
+      "event:emit"
+    ]
+  }
+}

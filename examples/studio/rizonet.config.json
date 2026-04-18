@@ -1,0 +1,28 @@
+{
+  "app": {
+    "name": "Rizonet Studio",
+    "identifier": "net.rizonet.studio",
+    "dist_dir": "dist"
+  },
+  "window": {
+    "title": "Rizonet Studio",
+    "width": 980,
+    "height": 720,
+    "resizable": true
+  },
+  "runtime": {
+    "mode": "auto"
+  },
+  "capabilities": {
+    "allow": [
+      "studio:*",
+      "dialog:*",
+      "shell:open",
+      "path:*",
+      "clipboard:*",
+      "window:*",
+      "devtools:*",
+      "event:emit"
+    ]
+  }
+}

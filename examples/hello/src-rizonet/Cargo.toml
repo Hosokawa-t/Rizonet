@@ -1,0 +1,15 @@
+[package]
+name = "hello-rizonet"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+
+[[bin]]
+name = "hello-rizonet"
+path = "src/main.rs"
+
+[dependencies]
+rizonet-core.workspace = true
+serde_json.workspace = true
+tracing.workspace = true
+tracing-subscriber.workspace = true

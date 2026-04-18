@@ -1,0 +1,39 @@
+[package]
+name = "rizonet-core"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+description = "Rizonet core: hybrid webview runtime combining Tauri's footprint with Electron's consistency."
+
+[dependencies]
+wry.workspace = true
+tao.workspace = true
+rfd.workspace = true
+notify-rust.workspace = true
+arboard.workspace = true
+opener.workspace = true
+serde.workspace = true
+serde_json.workspace = true
+tokio.workspace = true
+anyhow.workspace = true
+thiserror.workspace = true
+reqwest.workspace = true
+directories.workspace = true
+sha2.workspace = true
+hex.workspace = true
+tracing.workspace = true
+zip.workspace = true
+semver.workspace = true
+tempfile.workspace = true
+
+[target.'cfg(target_os = "windows")'.dependencies]
+winreg.workspace = true
+
+[features]
+default = ["bootstrap"]
+# When enabled, Rizonet will auto-download a consistent runtime if the
+# system webview is missing or below the required version.
+bootstrap = []
+# Force-download the bundled runtime even if a system webview is present.
+# Gives Electron-level rendering consistency at the cost of first-launch DL.
+strict-runtime = ["bootstrap"]

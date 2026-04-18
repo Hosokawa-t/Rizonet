@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Rizonet Notes</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <aside class="sidebar">
+    <header class="sidebar__header">
+      <h1>⚡ Notes</h1>
+      <button id="new-note" title="New note">＋</button>
+    </header>
+    <div class="sidebar__search">
+      <input id="search" type="search" placeholder="Filter..." />
+    </div>
+    <ul id="note-list" class="note-list"></ul>
+    <footer class="sidebar__footer">
+      <button id="reveal-dir" title="Open notes folder">📂 Folder</button>
+      <button id="open-devtools" title="Open devtools">🔧 DevTools</button>
+      <span id="status" class="status">—</span>
+    </footer>
+  </aside>
+  <main class="editor">
+    <header class="editor__header">
+      <input id="title" type="text" placeholder="Untitled" disabled />
+      <div class="editor__actions">
+        <button id="copy" disabled title="Copy note to clipboard">Copy</button>
+        <button id="import" title="Import a .md file via native dialog">Import</button>
+        <button id="save" disabled>Save</button>
+        <button id="delete" class="danger" disabled>Delete</button>
+      </div>
+    </header>
+    <div class="editor__body">
+      <textarea id="editor" placeholder="Start typing markdown..." disabled></textarea>
+      <article id="preview" class="preview"></article>
+    </div>
+  </main>
+  <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,16 @@
+{
+  "app": {
+    "name": "Hello Rizonet",
+    "identifier": "net.rizonet.hello",
+    "dist_dir": "dist"
+  },
+  "window": {
+    "title": "Hello Rizonet",
+    "width": 960,
+    "height": 640,
+    "resizable": true
+  },
+  "runtime": {
+    "mode": "auto"
+  }
+}

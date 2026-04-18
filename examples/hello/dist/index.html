@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Hello Rizonet</title>
+  <style>
+    :root { color-scheme: light dark; }
+    * { box-sizing: border-box; }
+    body {
+      font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+      margin: 0; min-height: 100vh;
+      display: grid; place-items: center;
+      background: radial-gradient(1000px 600px at 20% 10%, #1e3a8a, transparent),
+                  radial-gradient(800px 500px at 80% 90%, #7c3aed, transparent),
+                  #0b1020;
+      color: #e5e7eb;
+    }
+    .card {
+      padding: 2.25rem 2.75rem;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.12);
+      backdrop-filter: blur(14px);
+      border-radius: 16px;
+      box-shadow: 0 20px 60px rgba(0,0,0,.4);
+      max-width: 560px; width: 90vw;
+    }
+    h1 { margin: 0 0 .25rem; font-size: 2rem; letter-spacing: .02em; }
+    .tag {
+      display: inline-block; padding: .15rem .5rem; border-radius: 999px;
+      background: linear-gradient(90deg,#22d3ee,#a78bfa); color:#0b1020; font-weight:700;
+      font-size:.75rem;
+    }
+    button {
+      margin-top: 1rem; padding: .6rem 1.1rem; border: 0; border-radius: 10px;
+      background: linear-gradient(135deg,#22d3ee,#a78bfa); color: #0b1020; font-weight: 700;
+      cursor: pointer;
+    }
+    pre { background: rgba(0,0,0,.4); padding: 1rem; border-radius: 10px; overflow:auto; }
+    small { color:#94a3b8; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="tag">Rizonet v0.1</div>
+    <h1>⚡ Hello, Rizonet</h1>
+    <p>As light as Tauri. As portable as Electron.</p>
+    <div style="display:flex; gap:.5rem; flex-wrap:wrap;">
+      <button data-cmd="ping">ping</button>
+      <button data-cmd="app_version">app_version</button>
+      <button data-cmd="platform_key">platform_key</button>
+      <button data-cmd="clock:now">clock:now</button>
+    </div>
+    <pre id="out">click a button</pre>
+    <small>IPC: window.__RIZONET__.invoke(cmd, payload)</small>
+  </div>
+  <script>
+    const out = document.getElementById('out');
+    document.querySelectorAll('button[data-cmd]').forEach(btn => {
+      btn.addEventListener('click', async () => {
+        const cmd = btn.dataset.cmd;
+        out.textContent = `${cmd}...`;
+        try {
+          const r = await window.__RIZONET__.invoke(cmd, {
+            from: 'web', now: new Date().toISOString()
+          });
+          out.textContent = JSON.stringify(r, null, 2);
+        } catch (e) {
+          out.textContent = 'error: ' + e.message;
+        }
+      });
+    });
+  </script>
+</body>
+</html>
