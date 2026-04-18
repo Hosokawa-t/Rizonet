@@ -17,10 +17,11 @@ path = "src/main.rs"
 tempfile.workspace = true
 
 [dependencies]
-rizonet-core.workspace = true
+rizonet-core = { workspace = true, features = ["iconify"] }
 serde.workspace = true
 serde_json.workspace = true
 tracing.workspace = true
 tracing-subscriber.workspace = true
 directories.workspace = true
 include_dir.workspace = true
+zip.workspace = true

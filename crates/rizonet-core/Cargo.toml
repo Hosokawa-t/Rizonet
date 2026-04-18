@@ -25,12 +25,18 @@ tracing.workspace = true
 zip.workspace = true
 semver.workspace = true
 tempfile.workspace = true
+# Icon conversion (any image → multi-resolution .ico). Optional because the
+# runtime itself does not need them; only the packaging pipeline does.
+image = { version = "0.25", default-features = false, features = ["png", "jpeg", "bmp", "gif", "webp", "ico", "tiff"], optional = true }
+ico = { version = "0.4", optional = true }
 
 [target.'cfg(target_os = "windows")'.dependencies]
 winreg.workspace = true
 
 [features]
 default = ["bootstrap"]
+# Image → .ico conversion helpers (pulled in by the CLI and Studio).
+iconify = ["dep:image", "dep:ico"]
 # When enabled, Rizonet will auto-download a consistent runtime if the
 # system webview is missing or below the required version.
 bootstrap = []

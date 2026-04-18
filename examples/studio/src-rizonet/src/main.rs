@@ -164,6 +164,8 @@ fn main() -> Result<()> {
                             "binary": out.binary.display().to_string(),
                             "dist": out.dist.display().to_string(),
                             "config": out.config.display().to_string(),
+                            "icon": out.icon.as_ref().map(|p| p.display().to_string()),
+                            "installer": out.installer.as_ref().map(|p| p.display().to_string()),
                         }),
                     );
                 }

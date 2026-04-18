@@ -40,6 +40,18 @@ enum Cmd {
         #[arg(long, default_value = env!("CARGO_PKG_VERSION"))]
         current: String,
     },
+    /// Convert any image file into a multi-resolution Windows `.ico`.
+    ///
+    /// Accepts PNG/JPEG/BMP/GIF/WebP/TIFF input of any aspect ratio; the
+    /// image is letterboxed onto a transparent square canvas, then
+    /// rescaled to 16/24/32/48/64/128/256 px and packaged into one .ico.
+    Icon {
+        /// Source image (any supported format, any aspect ratio).
+        src: PathBuf,
+        /// Output .ico path. Defaults to `<src stem>.ico` alongside the source.
+        #[arg(long, short)]
+        out: Option<PathBuf>,
+    },
 }
 
 fn main() -> Result<()> {
@@ -57,7 +69,37 @@ fn main() -> Result<()> {
         Cmd::Build => build(),
         Cmd::Info => info(),
         Cmd::UpdateCheck { manifest, current } => update_check(&manifest, &current),
+        Cmd::Icon { src, out } => iconify(&src, out.as_deref()),
     }
+}
+
+fn iconify(src: &Path, out: Option<&Path>) -> Result<()> {
+    if !src.is_file() {
+        anyhow::bail!("icon source not found: {:?}", src);
+    }
+    let default_out;
+    let out_path = match out {
+        Some(p) => p,
+        None => {
+            let stem = src
+                .file_stem()
+                .map(|s| s.to_owned())
+                .unwrap_or_else(|| std::ffi::OsString::from("icon"));
+            default_out = src
+                .parent()
+                .unwrap_or_else(|| Path::new("."))
+                .join(format!("{}.ico", stem.to_string_lossy()));
+            &default_out
+        }
+    };
+    let bytes = rizonet_core::iconify::image_to_ico(src, out_path).map_err(to_anyhow)?;
+    println!(
+        "wrote {} ({} bytes, {} sizes)",
+        out_path.display(),
+        bytes,
+        rizonet_core::iconify::ICON_SIZES.len()
+    );
+    Ok(())
 }
 
 fn update_check(manifest_url: &str, current: &str) -> Result<()> {

@@ -17,4 +17,4 @@ serde_json.workspace = true
 tracing.workspace = true
 tracing-subscriber.workspace = true
 tokio.workspace = true
-rizonet-core.workspace = true
+rizonet-core = { workspace = true, features = ["iconify"] }

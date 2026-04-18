@@ -25,6 +25,9 @@ pub mod runtime;
 pub mod state;
 pub mod updater;
 
+#[cfg(feature = "iconify")]
+pub mod iconify;
+
 pub use acl::CapabilitiesConfig;
 pub use api::event::{handle, try_handle, AppHandle, UserEvent, WindowOp};
 pub use app::{App, AppBuilder};

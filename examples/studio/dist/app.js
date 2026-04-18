@@ -18,6 +18,9 @@ const els = {
   resizable: document.getElementById("resizable"),
   allow: document.getElementById("allow"),
   makeInstaller: document.getElementById("make-installer"),
+  icon: document.getElementById("icon"),
+  pickIcon: document.getElementById("pick-icon"),
+  clearIcon: document.getElementById("clear-icon"),
   build: document.getElementById("build"),
   openOut: document.getElementById("open-out"),
   devtools: document.getElementById("devtools"),
@@ -53,6 +56,17 @@ els.pickOutput.addEventListener("click", async () => {
   if (p) els.output.value = p;
 });
 
+els.pickIcon.addEventListener("click", async () => {
+  const p = await invoke("dialog:open_file", {
+    title: "Pick icon image (any format, any aspect ratio)",
+    filters: [
+      { name: "Images", extensions: ["png", "jpg", "jpeg", "webp", "bmp", "gif", "tiff", "ico"] },
+    ],
+  });
+  if (p) els.icon.value = p;
+});
+els.clearIcon.addEventListener("click", () => { els.icon.value = ""; });
+
 els.devtools.addEventListener("click", () => invoke("devtools:open"));
 
 els.build.addEventListener("click", async () => {
@@ -69,6 +83,7 @@ els.build.addEventListener("click", async () => {
     resizable: els.resizable.checked,
     allow: els.allow.value.split(/\r?\n/).map((s) => s.trim()).filter(Boolean),
     make_installer: els.makeInstaller.checked,
+    icon_path: els.icon.value.trim() || null,
   };
 
   if (!args.source_dir) {
@@ -107,6 +122,7 @@ window.__RIZONET__.on("studio:done", (p) => {
   setProgress("ok", "done");
   appendLog("✔ binary:    " + p.binary, "ok");
   appendLog("✔ assets:    " + p.dist, "ok");
+  if (p.icon) appendLog("✔ icon:      " + p.icon, "ok");
   if (p.installer) appendLog("✔ installer: " + p.installer, "ok");
   els.build.disabled = false;
   els.openOut.disabled = false;

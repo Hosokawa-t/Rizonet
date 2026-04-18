@@ -39,6 +39,7 @@ fn packages_hello_example_into_a_standalone_binary() {
         resizable: true,
         allow: vec!["event:emit".into()],
         make_installer: false,
+        icon_path: None,
     };
 
     let logger: builder::Logger = Box::new(|stream, line| {
